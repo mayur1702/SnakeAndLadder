@@ -14,10 +14,12 @@ export default class Board extends Component {
         for(let i = 100;i > 0; i--) {
             if(flag) {
                 count--;
-                grid.push(<div className="grid" key={i}>{i}</div>)
+                let className = `grid grid-${i}`;
+                grid.push(<div className={className} key={i}>{i}</div>)
             } else {
                 count++;
-                grid.push(<div className="grid" key={i}>{step+count}</div>)
+                let className = `grid grid-${step+count}`;
+                grid.push(<div className={className} key={i}>{step+count}</div>)
             }
             if(count == 0) flag = false;
             if(count == 10) {
