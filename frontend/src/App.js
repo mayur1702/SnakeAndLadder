@@ -1,12 +1,11 @@
 import logo from './logo.svg';
 import './App.scss';
-import Board from './Components/Board';
+import Gameplay from './Components/Gameplay/Gameplay';
 
 function App() {
     return (
         <div className="main-container">
-        <div className="board"><Board /></div>
-        <div className="dice-container"></div>
+            <Gameplay />
         </div>
     );
 }  
