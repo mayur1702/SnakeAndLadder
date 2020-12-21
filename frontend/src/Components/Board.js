@@ -8,12 +8,22 @@ export default class Board extends Component {
     }
     render(){
         let rows = [];
-        for (var i = 10; i >= 1; i--){
-            let rowID = `row${i}`
-            let cell = []
-            for (var idx = 1; idx <= 10; idx++){
-                let cellID = `cell${i}-${idx}`
-                cell.push(<td key={cellID} id={cellID}>{idx}</td>)
+        for (var i = this.state.size; i >= 1; i--){
+            let rowID = `row${i}`;
+            let cell = [];
+            if(i % 2 != 0){
+                for (var idx = 1; idx <= this.state.size; idx++){
+                    let cellID = `cell${i}-${idx}`;
+                    let cellNum = idx + (i - 1) * 10;
+                    cell.push(<td key={cellID} id={cellID}>{cellNum}</td>)
+                }
+            }
+            else{
+                for (var idx = this.state.size; idx >= 1; idx--){
+                    let cellID = `cell${i}-${idx}`;
+                    let cellNum = idx + (i - 1) * 10;
+                    cell.push(<td key={cellID} id={cellID}>{cellNum}</td>)
+                }
             }
             rows.push(<tr key={i} id={rowID}>{cell}</tr>)
         }
