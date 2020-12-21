@@ -7,34 +7,28 @@ export default class Board extends Component {
         this.state = {size: 10}
     }
     render(){
-        let rows = [];
-        for (var i = this.state.size; i >= 1; i--){
-            let rowID = `row${i}`;
-            let cell = [];
-            if(i % 2 != 0){
-                for (var idx = 1; idx <= this.state.size; idx++){
-                    let cellID = `cell${i}-${idx}`;
-                    let cellNum = idx + (i - 1) * 10;
-                    cell.push(<td key={cellID} id={cellID}>{cellNum}</td>)
-                }
+        let grid = []
+        let count = 10;
+        let flag = true;
+        let step = 80;
+        for(let i = 100;i > 0; i--) {
+            if(flag) {
+                count--;
+                let className = `grid grid-${i}`;
+                grid.push(<div className={className} key={i}>{i}</div>)
+            } else {
+                count++;
+                let className = `grid grid-${step+count}`;
+                grid.push(<div className={className} key={i}>{step+count}</div>)
             }
-            else{
-                for (var idx = this.state.size; idx >= 1; idx--){
-                    let cellID = `cell${i}-${idx}`;
-                    let cellNum = idx + (i - 1) * 10;
-                    cell.push(<td key={cellID} id={cellID}>{cellNum}</td>)
-                }
+            if(count == 0) flag = false;
+            if(count == 10) {
+                flag = true;
+                step -= 20;
             }
-            rows.push(<tr key={i} id={rowID}>{cell}</tr>)
         }
         return(
-            <div className="board-wrap">
-                <table>
-                    <tbody>
-                        {rows}
-                    </tbody>
-                </table>
-            </div>
+            <div className="board-wrap">{grid}</div>
         )
     };
 }
