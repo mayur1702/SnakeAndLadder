@@ -7,24 +7,26 @@ export default class Board extends Component {
         this.state = {size: 10}
     }
     render(){
-        let rows = [];
-        for (var i = 10; i >= 1; i--){
-            let rowID = `row${i}`
-            let cell = []
-            for (var idx = 1; idx <= 10; idx++){
-                let cellID = `cell${i}-${idx}`
-                cell.push(<td key={cellID} id={cellID}>{idx}</td>)
+        let grid = []
+        let count = 10;
+        let flag = true;
+        let step = 80;
+        for(let i = 100;i > 0; i--) {
+            if(flag) {
+                count--;
+                grid.push(<div className="grid" key={i}>{i}</div>)
+            } else {
+                count++;
+                grid.push(<div className="grid" key={i}>{step+count}</div>)
             }
-            rows.push(<tr key={i} id={rowID}>{cell}</tr>)
+            if(count == 0) flag = false;
+            if(count == 10) {
+                flag = true;
+                step -= 20;
+            }
         }
         return(
-            <div className="board-wrap">
-                <table>
-                    <tbody>
-                        {rows}
-                    </tbody>
-                </table>
-            </div>
+            <div className="board-wrap">{grid}</div>
         )
     };
 }
